@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import MenuItem from '../menu-item/menu-item.component';
 
 import './directory.styles.scss';
@@ -14,9 +15,9 @@ class Directory extends Component{
         }
     }
     renderdata(){
-        let newArr = this.state.sections.map(({title, id, size, imageUrl}) => {
+        let newArr = this.state.sections.map(({id, ...sectionsData}) => {
             return (
-                <MenuItem key={id} title={title} ImageUrl={imageUrl} size={size} />
+                <MenuItem key={id} {...sectionsData} />
             )
         })
         return newArr;
