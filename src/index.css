@@ -1,3 +1,8 @@
+* {
+  /* Sizing Blok For Every JSX Tag Attribute */
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Open Sans Condensed", sans-serif;
@@ -5,6 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding: 20px 60px;
 }
+
 a {
   text-decoration: none;
   color: black;

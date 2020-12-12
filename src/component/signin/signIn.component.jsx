@@ -2,12 +2,13 @@ import React, {Component} from 'react'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 
+import {auth, SignInWithGoogle} from '../../firebase/firebase.utils'
+
 import './signin.styles.scss';
 
 class SignIn extends Component{
     constructor(props){
         super(props);
-
         this.state = {
             'email': '',
             'password': ''
@@ -15,22 +16,36 @@ class SignIn extends Component{
     }
 
     handleChange = event => {
-        console.log(event)
+        event.preventDefault();
         const {name, value} = event.target;
-
         this.setState({[name]: value});
     }
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
         event.preventDefault();
 
-        this.setState({'email': '', 'password': ''});
+        const {email, password} = this.state;
+
+        try{
+            await auth.signInWithEmailAndPassword(email, password);
+
+            alert('Sign In Successfully');
+
+            this.setState(
+                {
+                    email: '',
+                    password: ''
+                }
+            )
+        }catch(error){
+            console.error("error", error.message)
+        }
     }
 
     render(){
         return(
             <div className="sign-in">
-                <h2>I Already Have An Account</h2>
+                <h2 className="title">I Already Have An Account</h2>
                 <span>Sign in with your Email and Password</span>
                 <form onSubmit={this.handleSubmit}>
                     <FormInput
@@ -49,7 +64,10 @@ class SignIn extends Component{
                         onChange={this.handleChange}
                         required
                     />
-                    <CustomButton type="submit">Sign In</CustomButton>
+                    <div className="buttons">
+                        <CustomButton type="submit" >Sign In</CustomButton>
+                        <CustomButton type="button" onClick={SignInWithGoogle} isSignGoogle>{' '}Sign In With Google{' '}</CustomButton>
+                    </div>
                 </form>
             </div>
         )
