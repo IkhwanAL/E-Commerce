@@ -27,22 +27,30 @@ class SignIn extends Component{
         const {email, password} = this.state;
 
         try{
-            await auth.signInWithEmailAndPassword(email, password);
-
-            alert('Sign In Successfully');
-
-            this.setState(
-                {
-                    email: '',
-                    password: ''
+            await auth.signInWithEmailAndPassword(email, password).then(
+                () => {
+                    alert(`Welcome`);
+                    // alert('Sign In Successfully');
+                    
+                    this.setState(
+                        {
+                            email: '',
+                            password: ''
+                        }
+                    )
                 }
-            )
+            ).catch(error => {
+                alert(error.message)
+            })
+
         }catch(error){
-            console.error("error", error.message)
+            alert("Something Wrong");
+            console.log(error);
         }
     }
 
     render(){
+        const {email, password} = this.state;
         return(
             <div className="sign-in">
                 <h2 className="title">I Already Have An Account</h2>
@@ -52,7 +60,7 @@ class SignIn extends Component{
                         name="email"
                         type="email"
                         label="Email"
-                        value={this.state.email}
+                        value={email}
                         onChange={this.handleChange}
                         required
                     />
@@ -60,7 +68,7 @@ class SignIn extends Component{
                         name="password"
                         type="password"
                         label="Password"
-                        value={this.state.password}
+                        value={password}
                         onChange={this.handleChange}
                         required
                     />
