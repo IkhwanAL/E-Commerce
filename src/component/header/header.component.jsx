@@ -1,4 +1,7 @@
 import React from 'react';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cartDropdown/cart-dropdown.component'
+
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { ReactComponent as Logo } from "../../assets/crown.svg";
@@ -6,8 +9,7 @@ import { auth } from '../../firebase/firebase.utils';
 
 import './header.styles.scss'
 
-
-const Header = ({currentUser}) => {
+const Header = ({currentUser, hidden}) => {
     return (
         <div className="header">
             <Link to="/" className="logo-container">    
@@ -18,7 +20,7 @@ const Header = ({currentUser}) => {
                 <Link to="/contact" className="option" >CONTACT</Link>
                 {
                     currentUser ? (
-                        <div className="option" onClick={() => auth.signOut().then(function(){
+                        <div className="option" onClick={() => auth.signOut().then(() => {
                             console.log("Api Sign Out Called");
                         }).catch(function(error){
                             console.log(error)
@@ -28,15 +30,21 @@ const Header = ({currentUser}) => {
                         ):(
                             <Link to="/signin" className="option">SIGN IN</Link>
                         )
+                    // End 
                 }
+                <CartIcon/>
             </div>
+            {
+                hidden ? null : <CartDropdown/> 
+            }
         </div>
     )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => {
     return ({
-        currentUser: state.user.currentUser,
+        currentUser,
+        hidden
     })
 }
 

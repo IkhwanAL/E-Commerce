@@ -55,11 +55,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({ // Just Show the Data
   currentUser: state.user.currentUser,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({ // Set The Data In State
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
