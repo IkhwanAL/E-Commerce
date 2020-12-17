@@ -1,7 +1,11 @@
 import CartTypes from './cart.types.redux';
 
-const CartActionTrigger = () => ({
+export const CartActionTrigger = () => ({
     type: CartTypes.SET_HIDDEN,
 })
 
-export default CartActionTrigger;
+export const AddItemTrigger = item => ({
+    type: CartTypes.ADD_ITEM,
+    payload: item
+});
+

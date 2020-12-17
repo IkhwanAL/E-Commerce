@@ -37,7 +37,7 @@ export default class SignUp extends Component{
 
         try{
             const {user} = await auth.createUserWithEmailAndPassword(email, password)
-                    .catch(error => alert(error));
+                            .catch(error => alert(error));
             
             await createUserProfileRef(user, {displayName});
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import CartActionTrigger from '../../redux/cart/cart.action.redux';
+import {CartActionTrigger} from '../../redux/cart/cart.action.redux';
 
 import { ReactComponent as ShoppingBag } from '../../assets/shopping-bag.svg';
 import { connect } from 'react-redux';
