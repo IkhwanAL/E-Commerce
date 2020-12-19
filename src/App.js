@@ -4,11 +4,13 @@ import SignInAndSignUpPage from './pages/signInAndSignUpPage/signInAndSignUpPage
 import Header from './component/header/header.component'
 
 import { Route, Switch, Redirect } from "react-router-dom";
-import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { selectCurrentUser } from './redux/user/user.selector'
+import { createStructuredSelector } from 'reselect'
 import { setCurrentUser } from './redux/user/user.action.redux'
-
 import { auth, createUserProfileRef } from './firebase/firebase.utils';
+
+import React, { Component } from 'react'
 
 class App extends Component {
   userSubscription = null;
@@ -55,11 +57,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ // Just Show the Data
-  currentUser: state.user.currentUser,
+const mapStateToProps = createStructuredSelector({ // Just Show the Data
+  currentUser: selectCurrentUser
 })
 
-const mapDispatchToProps = dispatch => ({ // Set The Data In State
+const mapDispatchToProps = dispatch => ({ // Set The Data Into Redux
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
