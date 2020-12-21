@@ -23,4 +23,5 @@ function calculate(){
     return result3Array;
 }
 
+var dd = new Promise();
 calculate();
