@@ -24,7 +24,7 @@ const Header = ({currentUser, hidden}) => {
                 {
                     currentUser ? (
                         <div className="option" onClick={() => auth.signOut().then(() => {
-                            console.log("Api Sign Out Called");
+                            alert("Api Sign Out Called");
                         }).catch(function(error){
                             console.log(error)
                         })}>
